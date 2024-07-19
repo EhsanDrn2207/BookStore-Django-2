@@ -7,5 +7,5 @@ class CustomUserModel(AbstractUser):
         ("Male", "Male"),
         ("Female", "Female")
     )
-    age = models.PositiveIntegerField(black=True, null=True)
+    age = models.PositiveIntegerField(blank=True, null=True)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
