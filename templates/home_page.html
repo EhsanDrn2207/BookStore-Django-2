@@ -7,12 +7,17 @@
 {% block content %}
 	<h1>Home Page</h1>
     {% if user.is_authenticated %}
-        <form action="{% url "login" %}" method="post">
+        <form action="{% url "logout" %}" method="post">
         {% csrf_token %}
         <p>welcome {{ user.username }}
         <span> | </span>
         <button type="submit">log out</button></p>
         </form>
+    {% else %}
+        <p>
+            <a href="{% url "login" %}">login</a>
+            <span>|</span>
+            <a href="{% url "signup" %}">sign up</a>
+        </p>
     {% endif %}
-
 {% endblock %}
