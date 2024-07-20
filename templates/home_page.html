@@ -1,1 +1,18 @@
-hello World
+{% extends "_base.html" %}
+
+{% block title %}
+	home page
+{% endblock %}
+
+{% block content %}
+	<h1>Home Page</h1>
+    {% if user.is_authenticated %}
+        <form action="{% url "login" %}" method="post">
+        {% csrf_token %}
+        <p>welcome {{ user.username }}
+        <span> | </span>
+        <button type="submit">log out</button></p>
+        </form>
+    {% endif %}
+
+{% endblock %}
