@@ -38,3 +38,27 @@ class BooksTestCase(TestCase):
         response = self.client.get(reverse('books_list'))
         self.assertTemplateUsed(response, "books/books_list.html")
 
+    def test_book_detail_view(self):
+        self.assertEqual(self.book1.title, 'title1')
+        self.assertEqual(self.book1.description, 'text1')
+        self.assertEqual(self.book1.author, 'author1')
+        self.assertEqual(self.book1.cost, 111.111)
+
+    def test_book_detail_url(self):
+        response = self.client.get(f'/books/{self.book1.id}/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_detail_url_name(self):
+        response = self.client.get(reverse("book_detail", args=[self.book1.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_detail_template_used(self):
+        response = self.client.get(reverse('book_detail', args=[self.book1.id]))
+        self.assertTemplateUsed(response, "books/book_detail.html")
+
+    def test_book_detail_components(self):
+        response = self.client.get(reverse('book_detail', args=[self.book1.id]))
+        self.assertContains(response, self.book1.title)
+        self.assertContains(response, self.book1.description)
+        self.assertContains(response, self.book1.author)
+        self.assertContains(response, self.book1.cost)
