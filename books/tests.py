@@ -76,18 +76,42 @@ class BooksTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_book_create_view(self):
-        book2 = Book.objects.create(
-            title="title2",
-            description='text2',
-            author='author2',
-            cost=222.222
+        book2 = self.client.post(path=reverse("book_create"), data={
+            "title": "title2",
+            "description": 'text2',
+            "author": 'author2',
+            "cost": 222.222,
+            }
         )
-        self.assertEqual(Book.objects.last().title, book2.title)
-        self.assertEqual(Book.objects.last().description, book2.description)
-        self.assertEqual(Book.objects.last().author, book2.author)
-        self.assertEqual(float(Book.objects.last().cost), book2.cost)
+        self.assertEqual(Book.objects.last().title, 'title2')
+        self.assertEqual(Book.objects.last().description, 'text2')
+        self.assertEqual(Book.objects.last().author, 'author2')
+        self.assertEqual(float(Book.objects.last().cost), 222.222)
 
     def test_book_create_template_used(self):
         response = self.client.get(reverse('book_create'))
         self.assertTemplateUsed(response, "books/book_create.html")
 
+    def test_book_update_url(self):
+        response = self.client.get(f"/books/{self.book1.id}/edit/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_update_name(self):
+        response = self.client.get(reverse("book_update", args=[self.book1.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_update_template_used(self):
+        response = self.client.get(reverse("book_update", args=[self.book1.id]))
+        self.assertTemplateUsed(response, "books/book_update.html")
+
+    def test_book_update_view(self):
+        response = self.client.post(path=(reverse("book_update", args=[self.book1.id])), data={
+            "title": "title3",
+            "description": "text3",
+            "author": "author3",
+            "cost": 333.333,
+        })
+        self.assertEqual(Book.objects.first().title, "title3")
+        self.assertEqual(Book.objects.first().description, "text3")
+        self.assertEqual(Book.objects.first().author, "author3")
+        self.assertEqual(float(Book.objects.first().cost), 333.333)
