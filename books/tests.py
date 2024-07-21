@@ -62,3 +62,32 @@ class BooksTestCase(TestCase):
         self.assertContains(response, self.book1.description)
         self.assertContains(response, self.book1.author)
         self.assertContains(response, self.book1.cost)
+
+    def test_get_object_or_404_page(self):
+        response = self.client.get(reverse('book_detail', args=[999]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_book_create_url(self):
+        response = self.client.get("/books/create/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_create_name(self):
+        response = self.client.get(reverse("book_create"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_create_view(self):
+        book2 = Book.objects.create(
+            title="title2",
+            description='text2',
+            author='author2',
+            cost=222.222
+        )
+        self.assertEqual(Book.objects.last().title, book2.title)
+        self.assertEqual(Book.objects.last().description, book2.description)
+        self.assertEqual(Book.objects.last().author, book2.author)
+        self.assertEqual(float(Book.objects.last().cost), book2.cost)
+
+    def test_book_create_template_used(self):
+        response = self.client.get(reverse('book_create'))
+        self.assertTemplateUsed(response, "books/book_create.html")
+
