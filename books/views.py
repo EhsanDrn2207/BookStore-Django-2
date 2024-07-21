@@ -36,3 +36,11 @@ def book_update_view(request, pk):
     else:
         form = BookForm(instance=book)
     return render(request, "books/book_update.html", context={"form": form, "book": book})
+
+
+def book_delete_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        book.delete()
+        return redirect("books_list")
+    return render(request, "books/book_delete.html", context={"book": book})

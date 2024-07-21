@@ -12,6 +12,6 @@
     <p>
         <a href="{% url "book_update" book.id %}">edit book</a>
         <span> | </span>
-        <a href=""></a>
+        <a href="{% url 'book_delete' book.id %}">delete book</a>
     </p>
 {% endblock %}
