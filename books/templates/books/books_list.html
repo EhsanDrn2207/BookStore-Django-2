@@ -7,8 +7,8 @@
 {% block content %}
 	<h1>Books list</h1>
     {% for book in books %}
-    	<h3>{{ book.title }}</h3>
+    	<h3><a href="{% url "book_detail" book.id %}">{{ book.title }}</a></h3>
         <p>{{ book.author }}</p>
-        <p>{{ book.cost}}</p>
+        <p>{{ book.description|truncatewords:15}}</p>
     {% endfor %}
 {% endblock %}
