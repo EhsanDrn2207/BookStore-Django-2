@@ -9,4 +9,9 @@
     <p>{{ book.description }}</p>
     <p>{{ book.author }}</p>
     <p>{{ book.cost}}</p>
+    <p>
+        <a href="{% url "book_update" book.id %}">edit book</a>
+        <span> | </span>
+        <a href=""></a>
+    </p>
 {% endblock %}

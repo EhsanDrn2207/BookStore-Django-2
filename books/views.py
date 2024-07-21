@@ -24,3 +24,15 @@ def book_create_view(request):
     else:
         form = BookForm()
     return render(request, "books/book_create.html", context={'form': form})
+
+
+def book_update_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        form = BookForm(None or request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect("books_list")
+    else:
+        form = BookForm(instance=book)
+    return render(request, "books/book_update.html", context={"form": form, "book": book})
