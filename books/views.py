@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Book
+
+
+def books_list_view(request):
+    books = Book.objects.all()
+    return render(request, "books/books_list.html", context={'books': books})

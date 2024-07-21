@@ -23,5 +23,5 @@ urlpatterns = [
     path("", generic.TemplateView.as_view(template_name="home_page.html"), name='home'),
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/", include("accounts.urls")),
-    path("book/", include("books.urls")),
+    path("books/", include("books.urls")),
 ]
