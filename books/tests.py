@@ -89,7 +89,6 @@ class BooksTestCase(TestCase):
         self.assertEqual(float(Book.objects.last().cost), 222.222)
         self.assertEqual(response.status_code, 302)
 
-
     def test_book_create_template_used(self):
         response = self.client.get(reverse('book_create'))
         self.assertTemplateUsed(response, "books/book_create.html")
@@ -118,7 +117,6 @@ class BooksTestCase(TestCase):
         self.assertEqual(Book.objects.first().author, "author3")
         self.assertEqual(float(Book.objects.first().cost), 333.333)
         self.assertEqual(response.status_code, 302)
-
 
     def test_book_delete_url(self):
         response = self.client.get(f'/books/{self.book1.id}/delete/')
