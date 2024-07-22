@@ -1,18 +1,29 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
+from django.views import generic
 
 from .forms import BookForm
 from .models import Book
 
 
-def books_list_view(request):
-    books = Book.objects.all()
-    return render(request, "books/books_list.html", context={'books': books})
+class BooksListView(generic.ListView):
+    model = Book
+    template_name = "books/books_list.html"
+    context_object_name = "books"
+
+# def books_list_view(request):
+#     books = Book.objects.all()
+#     return render(request, "books/books_list.html", context={'books': books})
 
 
-def book_detail_view(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    return render(request, "books/book_detail.html", context={'book': book})
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = "books/book_detail.html"
+    context_object_name = "book"
+
+# def book_detail_view(request, pk):
+#     book = get_object_or_404(Book, pk=pk)
+#     return render(request, "books/book_detail.html", context={'book': book})
 
 
 def book_create_view(request):
