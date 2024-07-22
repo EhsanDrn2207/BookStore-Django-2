@@ -26,16 +26,22 @@ class BookDetailView(generic.DetailView):
 #     return render(request, "books/book_detail.html", context={'book': book})
 
 
-def book_create_view(request):
-    if request.method == "POST":
-        form = BookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("books_list")
-    else:
-        form = BookForm()
-    return render(request, "books/book_create.html", context={'form': form})
+class BookCreateView(generic.CreateView):
+    model = Book
+    form_class = BookForm
+    template_name = "books/book_create.html"
+    context_object_name = 'form'
 
+# def book_create_view(request):
+#     if request.method == "POST":
+#         form = BookForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("books_list")
+#     else:
+#         form = BookForm()
+#     return render(request, "books/book_create.html", context={'form': form})
+#
 
 def book_update_view(request, pk):
     book = get_object_or_404(Book, pk=pk)
