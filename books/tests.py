@@ -76,7 +76,7 @@ class BooksTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_book_create_view(self):
-        book2 = self.client.post(path=reverse("book_create"), data={
+        response = self.client.post(path=reverse("book_create"), data={
             "title": "title2",
             "description": 'text2',
             "author": 'author2',
@@ -87,6 +87,8 @@ class BooksTestCase(TestCase):
         self.assertEqual(Book.objects.last().description, 'text2')
         self.assertEqual(Book.objects.last().author, 'author2')
         self.assertEqual(float(Book.objects.last().cost), 222.222)
+        self.assertEqual(response.status_code, 302)
+
 
     def test_book_create_template_used(self):
         response = self.client.get(reverse('book_create'))
@@ -115,3 +117,21 @@ class BooksTestCase(TestCase):
         self.assertEqual(Book.objects.first().description, "text3")
         self.assertEqual(Book.objects.first().author, "author3")
         self.assertEqual(float(Book.objects.first().cost), 333.333)
+        self.assertEqual(response.status_code, 302)
+
+
+    def test_book_delete_url(self):
+        response = self.client.get(f'/books/{self.book1.id}/delete/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_delete_name(self):
+        response = self.client.get(reverse("book_delete", args=[self.book1.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_book_delete_template_used(self):
+        response = self.client.get(reverse("book_delete", args=[self.book1.id]))
+        self.assertTemplateUsed(response, "books/book_delete.html")
+
+    def test_book_delete_view(self):
+        response = self.client.post(path=(reverse("book_delete", args=[self.book1.id])))
+        self.assertEqual(response.status_code, 302)
