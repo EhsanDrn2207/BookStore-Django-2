@@ -137,7 +137,7 @@ AUTH_USER_MODEL = "accounts.CustomUserModel"
 LOGIN_REDIRECT_URL = "books_list"
 
 # logout config
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "books_list"
 
 # crispy config
 CRISPY_ALLOWED_TEMPLATE_PACK = "bootstrap5"

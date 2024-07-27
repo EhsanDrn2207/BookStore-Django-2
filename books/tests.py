@@ -21,7 +21,7 @@ class BooksTestCase(TestCase):
         self.assertEqual(self.book1.cost, 111.111)
 
     def test_book_list_url(self):
-        response = self.client.get("/books/list/")
+        response = self.client.get("")
         self.assertEqual(response.status_code, 200)
 
     def test_book_list_url_name(self):

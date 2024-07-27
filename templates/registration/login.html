@@ -1,5 +1,10 @@
 {% extends "_base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+
+{% block style %}
+	<link rel="stylesheet" href={% static "css/login.css" %}>
+{% endblock %}
 
 {% block title %}
 	login page
