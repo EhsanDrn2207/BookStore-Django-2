@@ -18,14 +18,10 @@ class BooksListView(generic.ListView):
 #     return render(request, "books/books_list.html", context={'books': books})
 
 
-class BookDetailView(generic.DetailView):
-    model = Book
-    template_name = "books/book_detail.html"
-    context_object_name = "book"
-
-# def book_detail_view(request, pk):
-#     book = get_object_or_404(Book, pk=pk)
-#     return render(request, "books/book_detail.html", context={'book': book})
+def book_detail_view(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    book_comments = book.comment.all()
+    return render(request, "books/book_detail.html", context={'book': book, 'comments': book_comments})
 
 
 class BookCreateView(generic.CreateView):
