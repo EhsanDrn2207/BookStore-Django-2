@@ -23,3 +23,5 @@ class Comment(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     text = models.TextField()
     created_datetime = models.DateTimeField(auto_now_add=True)
+    recommend = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
