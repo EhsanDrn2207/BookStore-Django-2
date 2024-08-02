@@ -10,6 +10,8 @@ class Book(models.Model):
     author = models.CharField(max_length=50)
     cost = models.DecimalField(max_digits=6, decimal_places=3)
     cover = models.ImageField(upload_to="covers/", blank=True)
+    publisher = models.CharField(max_length=50, blank=True)
+    translator = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.title
