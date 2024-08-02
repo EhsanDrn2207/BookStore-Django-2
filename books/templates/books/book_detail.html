@@ -25,10 +25,14 @@
                             <h5 class="small my-1"><span class="text-muted">مترجم: </span>{{ book.translator }}</h5>
                             <h5 class="small my-1"><span class="text-muted">انتشارات: </span>{{ book.publisher }}</h5>
                             <h5 class="small my-1"><span class="text-muted">ایجاد کننده: </span>{{ book.user }}</h5>
-                            <h5 class="small my-1"><span class="text-muted"><a href="{% url "book_update" book.id %}">تغییر کتاب</a></span>
-                            </h5>
-                            <h5 class="small my-1"><span class="text-muted"><a href="{% url "book_delete" book.id %}">حذف کتاب</a></span>
-                            </h5>
+                            {% if book.user == user %}
+                                <h5 class="small my-1"><span class="text-muted"><a
+                                        href="{% url "book_update" book.id %}">تغییر کتاب</a></span>
+                                </h5>
+                                <h5 class="small my-1"><span class="text-muted"><a
+                                        href="{% url "book_delete" book.id %}">حذف کتاب</a></span>
+                                </h5>
+                            {% endif %}
                         </div>
 
                         <div class="col-xs-12 col-md-3 d-flex flex-column">
