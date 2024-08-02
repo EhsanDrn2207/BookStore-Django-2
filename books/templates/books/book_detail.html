@@ -24,6 +24,7 @@
                             <h5 class="small my-1"><span class="text-muted">نویسنده: </span>{{ book.author }}</h5>
                             <h5 class="small my-1"><span class="text-muted">مترجم: </span>{{ book.translator }}</h5>
                             <h5 class="small my-1"><span class="text-muted">انتشارات: </span>{{ book.publisher }}</h5>
+                            <h5 class="small my-1"><span class="text-muted">ایجاد کننده: </span>{{ book.user }}</h5>
                             <h5 class="small my-1"><span class="text-muted"><a href="{% url "book_update" book.id %}">تغییر کتاب</a></span>
                             </h5>
                             <h5 class="small my-1"><span class="text-muted"><a href="{% url "book_delete" book.id %}">حذف کتاب</a></span>
@@ -57,7 +58,7 @@
                                     {% else %}
                                         <h5 class="mb-3">{{ comment.user.username }}</h5>
                                         <h5 class="mb-3" style="color: red">توصیه نمی کنم</h5>
-                                        <p>{{ comment.text|linebreaks}}</p>
+                                        <p>{{ comment.text|linebreaks }}</p>
                                     {% endif %}
                                 {% endif %}
                             </div>
