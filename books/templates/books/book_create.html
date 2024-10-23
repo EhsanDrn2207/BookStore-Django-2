@@ -15,6 +15,17 @@
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form|crispy }}
+                            {% if form.errors %}
+                                <div class="form-errors">
+                                    <ul>
+                                        {% for field in form %}
+                                            {% if field.errors %}
+                                                <li>{{ field.label }}: {{ field.errors }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
                             <button type="submit" class="btn btn-success mt-2">ذخیره</button>
                         </form>
                     </div>

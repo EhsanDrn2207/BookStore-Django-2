@@ -4,6 +4,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
 
 from .forms import BookForm, CommentForm
 from .models import Book
@@ -39,7 +40,7 @@ def book_detail_view(request, pk):
         'comments': book_comments,
         "comment_form": comment
     }
-                  )
+        )
 
 
 class BookCreateView(LoginRequiredMixin, generic.CreateView):
@@ -47,6 +48,15 @@ class BookCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = BookForm
     template_name = "books/book_create.html"
     context_object_name = 'form'
+
+    def form_valid(self, form):
+        try:
+            obj = form.save(commit=False)
+            obj.user = self.request.user
+            return super().form_valid(form)
+        except IntegrityError as e:
+            form.add_error(None, "A database error occurred: {}".format(e))
+            return self.form_invalid(form)
 
 # def book_create_view(request):
 #     if request.method == "POST":

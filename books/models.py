@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 
 class Book(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, unique=True)
     description = models.TextField()
     author = models.CharField(max_length=50)
     cost = models.DecimalField(max_digits=6, decimal_places=3)
