@@ -77,7 +77,7 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
 
     def test_func(self):
         obj = self.get_object()
-        return obj.user == self.request.user
+        return obj.user == self.request.user or self.request.user.username == 'admin'
 
 # def book_update_view(request, pk):
 #     book = get_object_or_404(Book, pk=pk)
@@ -98,7 +98,7 @@ class BookDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
 
     def test_func(self):
         obj = self.get_object()
-        return obj.user == self.request.user
+        return obj.user == self.request.user or self.request.user.username == 'admin'
 
 # def book_delete_view(request, pk):
 #     book = get_object_or_404(Book, pk=pk)
