@@ -14,8 +14,8 @@
                         <div class="col-xs-12 col-md-3 d-flex justify-content-center">
                             {% if book.cover %}
                                 <div>
-                                    <img src={{ book.cover.url }}
-                                                 class="img-fluid rounded-start" alt="...">
+                                    <img src="{{ book.cover.url }}"
+                                    class="img-fluid rounded-start" alt="{{book.title}}">
                                 </div>
                             {% endif %}
                         </div>
@@ -24,8 +24,9 @@
                             <h5 class="small my-1"><span class="text-muted">نویسنده: </span>{{ book.author }}</h5>
                             <h5 class="small my-1"><span class="text-muted">مترجم: </span>{{ book.translator }}</h5>
                             <h5 class="small my-1"><span class="text-muted">انتشارات: </span>{{ book.publisher }}</h5>
+                            <h5 class="small my-1"><span class="text-muted">دسته بندی: </span>{{ book.category }}</h5>
                             <h5 class="small my-1"><span class="text-muted">ایجاد کننده: </span>{{ book.user.username }}</h5>
-                            {% if book.user == user %}
+                            {% if book.user == user%}
                                 <h5 class="small my-1"><span class="text-muted"><a
                                         href="{% url "book_update" book.id %}">تغییر کتاب</a></span>
                                 </h5>

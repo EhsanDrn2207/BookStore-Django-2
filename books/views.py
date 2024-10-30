@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.views import generic
@@ -16,6 +17,9 @@ class BooksListView(generic.ListView):
     template_name = "books/books_list.html"
     context_object_name = "books"
 
+    def get_queryset(self):
+        return Book.objects.all().order_by("created_datetime")
+    
 # def books_list_view(request):
 #     books = Book.objects.all()
 #     return render(request, "books/books_list.html", context={'books': books})

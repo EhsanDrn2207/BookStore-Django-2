@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
-import django.core.mail.backends.console
-
+import os
 import environs
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -157,7 +155,8 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # static files config
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # media files config
 MEDIA_URL = "/media/"
-MEDIA_ROOT = str(BASE_DIR.joinpath("media"))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

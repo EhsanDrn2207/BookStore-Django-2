@@ -25,6 +25,8 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE, related_name="book_published", blank=True)
     translator = models.CharField(max_length=50, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="book", null=True, blank=True)
+    created_datetime = models.DateTimeField(auto_now_add=True)
+    modified_datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
