@@ -22,7 +22,7 @@ class BookSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField()  
     publisher = PublisherSerializer()
     category = CategorySerializer()
-    comment = CommentSerializer(many=True, read_only=True)  
+    comment = CommentSerializer(many=True,)  
 
     class Meta:
         model = Book
