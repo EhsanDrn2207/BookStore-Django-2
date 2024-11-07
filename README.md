@@ -15,6 +15,7 @@ To get a local copy of the project up and running, follow these steps:
 
 ### Prerequisites
 - Python 3.x installed on your system
+- Docker (optional, if you wish to containerize the app)
 - PostgreSQL or any other database of your choice (optional, depending on your configuration)
 
 ### Installation
@@ -73,13 +74,7 @@ To get a local copy of the project up and running, follow these steps:
 - **Django** - A high-level Python web framework.
 - **Python** - The core programming language.
 - **PostgreSQL** - Default database (configurable to other options).
-- _[Add any additional technologies here if applicable]_
+- **Docker** - For containerizing the application (optional but recommended).
 
 ## Author
-- **[EhsanDrn2207]** - [Your Contact Info or GitHub Profile]
-
-Feel free to customize or extend the features based on your specific requirements.
-
----
-
-Enjoy managing your personal library!
+- **EhsanDrn2207**
