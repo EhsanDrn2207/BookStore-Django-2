@@ -1,5 +1,5 @@
 from rest_framework import viewsets, permissions
-from .models import Book, Comment, Publisher, Category
+from books.models import Book, Comment, Publisher, Category
 from .serializers import BookSerializer, CommentSerializer, PublisherSerializer, CategorySerializer
 
 class BookViewSet(viewsets.ModelViewSet):

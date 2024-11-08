@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .api_views import BookViewSet, CommentViewSet, PublisherViewSet, CategoryViewSet 
+from .api.api_views import BookViewSet, CommentViewSet, PublisherViewSet, CategoryViewSet 
 from . import views
 
 
