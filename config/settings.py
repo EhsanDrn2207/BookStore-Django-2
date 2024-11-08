@@ -27,11 +27,11 @@ environs.Env.read_env()
 SECRET_KEY = "!b#v0hk&#d)uqrxp54=vc==)cgeca2p@%+4he2k(_do#33i+-x"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = False 
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-
+HTTP_HOST = ['ehsandorodian.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
