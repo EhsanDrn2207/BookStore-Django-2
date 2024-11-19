@@ -18,10 +18,6 @@ class BooksListView(generic.ListView):
 
     def get_queryset(self):
         return Book.objects.all().order_by("created_datetime")
-    
-# def books_list_view(request):
-#     books = Book.objects.all()
-#     return render(request, "books/books_list.html", context={'books': books})
 
 
 @login_required
@@ -61,16 +57,6 @@ class BookCreateView(LoginRequiredMixin, generic.CreateView):
             form.add_error(None, "A database error occurred: {}".format(e))
             return self.form_invalid(form)
 
-# def book_create_view(request):
-#     if request.method == "POST":
-#         form = BookForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("books_list")
-#     else:
-#         form = BookForm()
-#     return render(request, "books/book_create.html", context={'form': form})
-#
 
 
 class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
@@ -82,16 +68,6 @@ class BookUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
         obj = self.get_object()
         return obj.user == self.request.user or self.request.user.username == 'admin'
 
-# def book_update_view(request, pk):
-#     book = get_object_or_404(Book, pk=pk)
-#     if request.method == "POST":
-#         form = BookForm(None or request.POST, instance=book)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("books_list")
-#     else:
-#         form = BookForm(instance=book)
-#     return render(request, "books/book_update.html", context={"form": form, "book": book})
 
 
 class BookDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -102,6 +78,34 @@ class BookDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
     def test_func(self):
         obj = self.get_object()
         return obj.user == self.request.user or self.request.user.username == 'admin'
+
+
+# def books_list_view(request):
+#     books = Book.objects.all()
+#     return render(request, "books/books_list.html", context={'books': books})
+
+
+# def book_create_view(request):
+#     if request.method == "POST":
+#         form = BookForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("books_list")
+#     else:
+#         form = BookForm()
+#     return render(request, "books/book_create.html", context={'form': form})
+#
+
+# def book_update_view(request, pk):
+#     book = get_object_or_404(Book, pk=pk)
+#     if request.method == "POST":
+#         form = BookForm(None or request.POST, instance=book)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("books_list")
+#     else:
+#         form = BookForm(instance=book)
+#     return render(request, "books/book_update.html", context={"form": form, "book": book})
 
 # def book_delete_view(request, pk):
 #     book = get_object_or_404(Book, pk=pk)

@@ -12,6 +12,29 @@ from books.models import Category, Book
 User = get_user_model()
 PASSWORD = "abcd1234"
 
+book_categories = [
+    "Fiction",
+    "Non-Fiction",
+    "Science",
+    "History",
+    "Biography",
+    "Fantasy",
+    "Mystery",
+    "Self-Help",
+    "Romance",
+    "Technology",
+    "Philosophy",
+    "Art",
+    "Cooking",
+    "Travel",
+    "Health",
+    "Education",
+    "Poetry",
+    "Business",
+    "Politics",
+    "Children's Literature"
+]
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         
@@ -40,8 +63,8 @@ class Command(BaseCommand):
             users.append(user)
         
         categories = []
-        for i in tqdm (range(1, 11), 'categories'):
-            category = Category.objects.create(name=f"category{i}")
+        for i in tqdm(book_categories, 'categories'):
+            category = Category.objects.create(name=i)
             categories.append(category)
 
         for i in tqdm (range(1, 21), 'books'):
