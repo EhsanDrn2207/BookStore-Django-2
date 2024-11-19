@@ -5,12 +5,16 @@ services:
     build: .
     command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - .:/code  # Mounts current directory to /code inside the container
     ports:
-      - "8000:8000"
+      - 8000:8000  # Maps host port 8000 to container port 8000
+    depends_on:
+      - db
+    environment:
+      - "DJANGO_SECRET_KEY=django-insecure-au!d=k6t#swtdzkey(k!$!1x&ygv%@b74sqjdlfq#0612_i2(x"
+      - "DJANGO_DEBUG=True"
 
   db:
     image: postgres:17
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
-

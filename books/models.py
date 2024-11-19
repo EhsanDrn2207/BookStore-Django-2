@@ -4,11 +4,6 @@ from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 
 
-class Publisher(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-
-    def __str__(self) -> str:
-        return self.name
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
@@ -22,7 +17,7 @@ class Book(models.Model):
     author = models.CharField(max_length=50)
     cost = models.DecimalField(max_digits=6, decimal_places=3)
     cover = models.ImageField(upload_to="covers/", blank=True)
-    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE, related_name="book_published", blank=True)
+    publisher = models.CharField(max_length=50)
     translator = models.CharField(max_length=50, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="book", null=True, blank=True)
     created_datetime = models.DateTimeField(auto_now_add=True)

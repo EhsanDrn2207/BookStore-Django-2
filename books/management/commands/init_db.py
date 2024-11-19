@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
-from books.models import Publisher, Category, Book
+from books.models import Category, Book
 
 
 User = get_user_model()
@@ -28,7 +28,6 @@ class Command(BaseCommand):
                 except Exception as e:
                     print(f"error occured while deleting {file_path}: {e}")
                     
-        Publisher.objects.all().delete()
         Category.objects.all().delete()
         Book.objects.all().delete()
         User.objects.all().delete()
@@ -39,11 +38,6 @@ class Command(BaseCommand):
         for i in tqdm (range(1, 11), 'users'):
             user = User.objects.create_user(f"user{i}", password=PASSWORD)
             users.append(user)
-
-        publishers = []
-        for i in tqdm (range(1, 11), 'publishers'):
-            publisher = Publisher.objects.create(name=f"publisher{i}")
-            publishers.append(publisher)
         
         categories = []
         for i in tqdm (range(1, 11), 'categories'):
@@ -57,7 +51,7 @@ class Command(BaseCommand):
                 description = f"description{i}",
                 author = f"author{i}",
                 cost = 999.999,
-                publisher = choice(publishers), 
+                publisher = f"publisher{i}", 
                 translator = f"trasnlator{i}",
                 category = choice(categories)
             )

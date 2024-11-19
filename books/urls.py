@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from .api_views import BookViewSet, CommentViewSet, PublisherViewSet, CategoryViewSet 
+from .api_views import BookViewSet, CommentViewSet, CategoryViewSet 
 
 
 from . import views
@@ -11,7 +11,6 @@ from . import views
 router = DefaultRouter()
 router.register(r'books', BookViewSet)
 router.register(r'comments', CommentViewSet)
-router.register(r'publishers', PublisherViewSet)
 router.register(r'categories', CategoryViewSet)
 
 urlpatterns = [

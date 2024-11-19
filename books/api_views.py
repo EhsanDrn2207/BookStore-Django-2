@@ -1,7 +1,7 @@
 # api_views.py
 from rest_framework import viewsets, permissions
-from .models import Book, Comment, Publisher, Category
-from .serializers import BookSerializer, CommentSerializer, PublisherSerializer, CategorySerializer
+from .models import Book, Comment, Category
+from .serializers import BookSerializer, CommentSerializer, CategorySerializer
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all().order_by("created_datetime")
@@ -18,11 +18,6 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-class PublisherViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Publisher.objects.all()
-    serializer_class = PublisherSerializer
-    permission_classes = [permissions.AllowAny]
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()

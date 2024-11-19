@@ -1,11 +1,6 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Book, Comment, Publisher, Category
-
-class PublisherSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Publisher
-        fields = ['id', 'name']
+from .models import Book, Comment, Category
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,7 +15,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField()  
-    publisher = PublisherSerializer()
     category = CategorySerializer()
     comment = CommentSerializer(many=True,)  
 
