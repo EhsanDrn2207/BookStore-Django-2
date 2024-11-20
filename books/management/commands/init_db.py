@@ -67,7 +67,7 @@ class Command(BaseCommand):
             category = Category.objects.create(name=i)
             categories.append(category)
 
-        for i in tqdm (range(1, 21), 'books'):
+        for i in tqdm (range(1, 31), 'books'):
             book = Book.objects.create(
                 user = choice(users),
                 title = f"title{i}",
